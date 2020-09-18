@@ -1,8 +1,6 @@
-import pandas as pd
 import xlrd
 from xlutils.copy import copy
-import xlsxwriter
-
+from openpyxl import *
 
 
 def read_range_from_file_4(path):
@@ -71,7 +69,14 @@ def filter_according_to_range(path,weihao_range_dict):
     print(cols_to_be_omit)
     print(cols_name_to_be_omit)
 
-    
+
+def delete_cols_rows(path, cols_to_be_omit,rows_to_be_omit):
+    wb = load_workbook(path)
+    ws = wb.active
+    ws.delete_cols(cols_to_be_omit)
+    ws.delete_rows(rows_to_be_omit)  
+    wb.save(path)
+
 
 
 if __name__ == "__main__":
